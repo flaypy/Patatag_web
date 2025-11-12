@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Pet - Patatag Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-brand-orange { background-color: #F97316; }
+        .text-brand-orange { color: #F97316; }
+        .border-brand-orange { border-color: #F97316; }
+        .ring-brand-orange { --tw-ring-color: #F97316; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="flex min-h-screen">
+        <!-- ===== Sidebar ===== -->
+        <aside class="w-64 bg-white shadow-lg flex flex-col">
+            <!-- Logo -->
+            <div class="p-6 text-center">
+                <img src="Logo Patatag.png" alt="Logo Patatag" class="h-10 mx-auto">
+            </div>
+            
+            <!-- Navegação -->
+            <nav class="flex-grow p-4 space-y-2">
+                <a href="web-dashboard.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 font-medium rounded-lg transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+                    <span>Meus Pets</span>
+                </a>
+                <a href="web-mapa.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 font-medium rounded-lg transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                    <span>Mapa Geral</span>
+                </a>
+                 <a href="web-adicionar-pet.html" class="flex items-center space-x-3 px-4 py-3 bg-orange-100 text-brand-orange font-bold rounded-lg transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span>Adicionar Pet</span>
+                </a>
+                <a href="web-perfil.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 font-medium rounded-lg transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    <span>Meu Perfil</span>
+                </a>
+            </nav>
+            
+            <!-- Logout -->
+            <div class="p-4">
+                 <a href="web-login.html" class="flex items-center space-x-3 px-4 py-3 text-red-500 hover:bg-red-50 font-medium rounded-lg transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- ===== Área de Conteúdo Principal (Formulário) ===== -->
+        <main class="flex-grow p-10">
+            <header class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-900">Adicionar Novo Pet</h1>
+            </header>
+
+            <!-- Card do Formulário -->
+            <div class="bg-white rounded-xl shadow-md p-8 max-w-2xl mx-auto">
+                <form class="space-y-6">
+                    
+                    <!-- Foto do Pet -->
+                    <div class="flex flex-col items-center space-y-3">
+                         <div class="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center text-gray-400">
+                            <img src="https://placehold.co/128x128/E2E8F0/4A5568?text=Pet" id="pet-image-preview" class="w-32 h-32 rounded-full object-cover">
+                         </div>
+                         <label for="pet-image" class="font-semibold text-brand-orange cursor-pointer hover:underline">Adicionar Foto</label>
+                         <input type="file" id="pet-image" class="hidden">
+                         <p class="text-xs text-gray-500">PNG, JPG ou GIF (Max. 5MB)</p>
+                    </div>
+
+                    <hr class="my-6">
+
+                    <!-- Campos do Formulário -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="pet-name" class="text-sm font-medium text-gray-700">Nome do Pet</label>
+                            <input type="text" id="pet-name" class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange" placeholder="Ex: Luke">
+                        </div>
+
+                        <div>
+                            <label for="pet-type" class="text-sm font-medium text-gray-700">Tipo</label>
+                            <select id="pet-type" class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange">
+                                <option>Cachorro</option>
+                                <option>Gato</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+
+                         <div class="md:col-span-2">
+                            <label for="patatag-id" class="text-sm font-medium text-gray-700">ID do Dispositivo Patatag</label>
+                            <input type="text" id="patatag-id" class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange" placeholder="Insira o código localizado na coleira/dispositivo">
+                        </div>
+                        
+                         <div class="md:col-span-2">
+                            <label for="pet-notes" class="text-sm font-medium text-gray-700">Notas Adicionais (Opcional)</label>
+                             <textarea id="pet-notes" rows="4" class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange" placeholder="Ex: Alergias, informações de contato, etc."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Salvar -->
+                    <div class="pt-6 text-right">
+                        <button type="submit" class="bg-brand-orange text-white font-bold py-3 px-6 rounded-lg hover:bg-orange-600 transition duration-300 shadow-md">
+                            Salvar Pet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
