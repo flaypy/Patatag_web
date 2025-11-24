@@ -6,7 +6,9 @@ Sistema completo de rastreamento de pets em tempo real usando **ESP32** + **NEO-
 
 ## 📋 Sobre o Projeto
 
-O Patatag é um sistema de rastreamento GPS para pets que permite:
+O Patatag é um sistema de rastreamento GPS para pets desenvolvido como Trabalho de Conclusão de Curso (TCC) no curso de Desenvolvimento de Software Multiplataforma da Fatec Praia Grande.
+
+O sistema permite:
 
 - ✅ Monitorar localização em tempo real
 - ✅ Visualizar histórico de movimentação
@@ -317,15 +319,22 @@ Este projeto é open source e está disponível sob a licença MIT.
 
 ## 👥 Autores
 
-- **Seu Nome** - Desenvolvimento inicial
+- **Lucas Paiolo**
+- **Kevin Flay**
+- **Gael Mormile**
+- **Marcos Antonio**
 
 ---
 
 ## 🙏 Agradecimentos
 
-- TinyGPS++ por Mikal Hart
-- Leaflet.js pela biblioteca de mapas
-- Comunidade Flask e ESP32
+🙏 Agradecimentos
+
+Gostaríamos de expressar nossa profunda gratidão a todos que tornaram este projeto possível:
+
+À Fatec Praia Grande, pela infraestrutura e pela excelência no ensino proporcionado no curso de Desenvolvimento de Software Multiplataforma.
+
+À nossa orientadora, Prof.ª Eulaliane Aparecida Gonçalves, por todo o suporte, paciência e conhecimento compartilhado, fundamentais para a concretização deste trabalho.
 
 ---
 
