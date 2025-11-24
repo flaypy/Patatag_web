@@ -328,13 +328,11 @@ Este projeto é open source e está disponível sob a licença MIT.
 
 ## 🙏 Agradecimentos
 
-🙏 Agradecimentos
-
 Gostaríamos de expressar nossa profunda gratidão a todos que tornaram este projeto possível:
 
-À Fatec Praia Grande, pela infraestrutura e pela excelência no ensino proporcionado no curso de Desenvolvimento de Software Multiplataforma.
+À **Fatec Praia Grande**, pela infraestrutura e pela excelência no ensino proporcionado no curso de Desenvolvimento de Software Multiplataforma.
 
-À nossa orientadora, Prof.ª Eulaliane Aparecida Gonçalves, por todo o suporte, paciência e conhecimento compartilhado, fundamentais para a concretização deste trabalho.
+À nossa orientadora, **Prof.ª Eulaliane Aparecida Gonçalves**, por todo o suporte, paciência e conhecimento compartilhado, fundamentais para a concretização deste trabalho.
 
 ---
 
