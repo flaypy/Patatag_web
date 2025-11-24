@@ -1,5 +1,3 @@
-<img src="[https://github.com/user-attachments/assets/fedb1de5-0a4a-449b-b82c-1408b836ee4f](https://i.imgur.com/Nwtd8hc.png")" />
-
 # 🐾 PATATAG - Rastreador GPS para Pets
 
 Sistema completo de rastreamento de pets em tempo real usando **ESP32** + **NEO-6M GPS** + **Flask** + **Leaflet Maps**
