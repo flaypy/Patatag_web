@@ -5,69 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - Patatag Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .bg-brand-orange { background-color: #F97316; }
         .text-brand-orange { color: #F97316; }
-        .border-brand-orange { border-color: #F97316; }
-        .ring-brand-orange { --tw-ring-color: #F97316; }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen py-12">
 
     <div class="w-full max-w-md p-8">
-        <!-- Logo -->
         <div class="text-center mb-10">
-            <img src="Logo Patatag.png" alt="Logo Patatag" class="h-14 mx-auto">
+            <img src="https://i.imgur.com/Nwtd8hc.png" alt="Logo Patatag" class="h-24 mx-auto">
         </div>
         
-        <!-- Card de Cadastro -->
         <div class="bg-white p-10 rounded-2xl shadow-xl">
-             <!-- Título -->
             <div class="text-center mb-8">
                 <h1 class="text-3xl font-bold text-gray-800">Crie sua Conta</h1>
                 <p class="text-gray-500 mt-2">É rápido e fácil.</p>
             </div>
 
-            <!-- Formulário -->
-            <form class="space-y-5">
+            <form id="registerForm" class="space-y-5">
                 <div>
                     <label for="name" class="text-sm font-medium text-gray-700">Nome completo</label>
-                    <input type="text" id="name" class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-orange" placeholder="Seu nome completo">
+                    <input type="text" id="name" required class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-orange">
                 </div>
                 <div>
                     <label for="email" class="text-sm font-medium text-gray-700">E-mail</label>
-                    <input type="email" id="email" class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-orange" placeholder="seuemail@exemplo.com">
+                    <input type="email" id="email" required class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-orange">
                 </div>
                 <div>
                     <label for="password" class="text-sm font-medium text-gray-700">Senha</label>
-                    <input type="password" id="password" class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-orange" placeholder="Crie uma senha forte">
+                    <input type="password" id="password" required class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-orange">
                 </div>
                  <div>
                     <label for="confirm-password" class="text-sm font-medium text-gray-700">Confirmar Senha</label>
-                    <input type="password" id="confirm-password" class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-orange" placeholder="Repita a senha">
+                    <input type="password" id="confirm-password" required class="mt-1 block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-orange">
                 </div>
 
                 <div class="pt-4">
-                     <!-- Link para a página do dashboard -->
-                    <a href="web-dashboard.html" class="block w-full text-center bg-brand-orange text-white font-bold py-3 px-4 rounded-lg hover:bg-orange-600 transition duration-300 shadow-md">
+                    <button type="submit" id="btnSubmit" class="block w-full text-center bg-brand-orange text-white font-bold py-3 px-4 rounded-lg hover:bg-orange-600 transition duration-300 shadow-md">
                         Criar Conta
-                    </a>
+                    </button>
                 </div>
             </form>
 
-            <!-- Link para Login -->
             <div class="text-center mt-8">
                 <p class="text-sm text-gray-600">
                     Já tem uma conta? 
-                    <a href="web-login.html" class="font-bold text-brand-orange hover:underline">Faça Login</a>
+                    <a href="/login" class="font-bold text-brand-orange hover:underline">Faça Login</a>
                 </p>
             </div>
         </div>
     </div>
 
+    <script src="{{ url_for('static', filename='api.js') }}"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirm-password').value;
+            const btn = document.getElementById('btnSubmit');
+
+            if(password !== confirm) {
+                alert('As senhas não coincidem!');
+                return;
+            }
+
+            try {
+                btn.innerText = 'Criando...';
+                btn.disabled = true;
+                await register(name, email, password);
+                alert('Conta criada com sucesso!');
+                window.location.href = '/dashboard';
+            } catch (error) {
+                alert(error.message || 'Erro ao criar conta');
+                btn.innerText = 'Criar Conta';
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>

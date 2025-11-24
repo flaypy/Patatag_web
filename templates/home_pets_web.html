@@ -2,127 +2,132 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Patatag Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .bg-brand-orange { background-color: #F97316; }
         .text-brand-orange { color: #F97316; }
-        .border-brand-orange { border-color: #F97316; }
     </style>
 </head>
 <body class="bg-gray-100">
 
     <div class="flex min-h-screen">
-        <!-- ===== Sidebar ===== -->
-        <aside class="w-64 bg-white shadow-lg flex flex-col">
-            <!-- Logo -->
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-lg flex flex-col fixed h-full">
             <div class="p-6 text-center">
-                <img src="Logo Patatag.png" alt="Logo Patatag" class="h-10 mx-auto">
+                <img src="https://i.imgur.com/Nwtd8hc.png" alt="Logo Patatag" class="h-16 mx-auto">
             </div>
             
-            <!-- Navegação -->
             <nav class="flex-grow p-4 space-y-2">
-                <a href="web-dashboard.html" class="flex items-center space-x-3 px-4 py-3 bg-orange-100 text-brand-orange font-bold rounded-lg transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                    </svg>
-                    <span>Meus Pets</span>
+                <a href="/dashboard" class="flex items-center space-x-3 px-4 py-3 bg-orange-100 text-brand-orange font-bold rounded-lg">
+                    <span>🐶 Meus Pets</span>
                 </a>
-                <a href="web-mapa.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 font-medium rounded-lg transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                    </svg>
-                    <span>Mapa Geral</span>
+                <a href="/mapa" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <span>🗺️ Mapa Geral</span>
                 </a>
-                 <a href="web-adicionar-pet.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 font-medium rounded-lg transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    <span>Adicionar Pet</span>
+                 <a href="/adicionar-pet" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <span>➕ Adicionar Pet</span>
                 </a>
-                <a href="web-perfil.html" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-gray-800 font-medium rounded-lg transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <span>Meu Perfil</span>
+                <a href="/perfil" class="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <span>👤 Meu Perfil</span>
                 </a>
             </nav>
             
-            <!-- Logout -->
             <div class="p-4">
-                 <a href="web-login.html" class="flex items-center space-x-3 px-4 py-3 text-red-500 hover:bg-red-50 font-medium rounded-lg transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
-                    <span>Sair</span>
-                </a>
+                 <button onclick="handleLogout()" class="w-full flex items-center space-x-3 px-4 py-3 text-red-500 hover:bg-red-50 rounded-lg">
+                    <span>🚪 Sair</span>
+                </button>
             </div>
         </aside>
 
-        <!-- ===== Área de Conteúdo Principal ===== -->
-        <main class="flex-grow p-10">
+        <!-- Conteúdo -->
+        <main class="flex-grow p-10 ml-64">
             <header class="flex justify-between items-center mb-8">
                 <h1 class="text-4xl font-bold text-gray-900">Meus Pets</h1>
-                <a href="web-adicionar-pet.html" class="bg-brand-orange text-white font-semibold px-6 py-3 rounded-lg hover:bg-orange-600 transition duration-300 shadow-md flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
-                    <span>Adicionar Novo Pet</span>
+                <a href="/adicionar-pet" class="bg-brand-orange text-white font-semibold px-6 py-3 rounded-lg hover:bg-orange-600 shadow-md flex items-center space-x-2">
+                    <span>+ Adicionar Novo Pet</span>
                 </a>
             </header>
 
-            <!-- Grid de Pets -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Card Pet 1 -->
-                <a href="web-mapa.html" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:ring-2 hover:ring-brand-orange transition-all duration-300">
-                    <div class="flex items-center space-x-5">
-                        <img src="https://placehold.co/80x80/F97316/FFFFFF?text=L" alt="Foto do Pet Luke" class="w-20 h-20 rounded-lg object-cover">
-                        <div class="flex-grow">
-                            <h3 class="font-bold text-2xl text-gray-800">Luke</h3>
-                            <p class="text-sm text-green-600 font-semibold bg-green-100 px-3 py-1 rounded-full inline-block mt-2">Seguro em Casa</p>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </div>
-                </a>
-                
-                <!-- Card Pet 2 -->
-                 <a href="web-mapa.html" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:ring-2 hover:ring-brand-orange transition-all duration-300">
-                    <div class="flex items-center space-x-5">
-                        <img src="https://placehold.co/80x80/3B82F6/FFFFFF?text=B" alt="Foto do Pet Biscoito" class="w-20 h-20 rounded-lg object-cover">
-                        <div class="flex-grow">
-                            <h3 class="font-bold text-2xl text-gray-800">Biscoito</h3>
-                            <p class="text-sm text-yellow-600 font-semibold bg-yellow-100 px-3 py-1 rounded-full inline-block mt-2">Passeando...</p>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </div>
-                </a>
-                
-                 <!-- Card Pet 3 (Exemplo) -->
-                 <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-5 opacity-60">
-                    <div class="w-20 h-20 rounded-lg bg-gray-200 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
-                    </div>
-                    <div class="flex-grow">
-                        <h3 class="font-bold text-2xl text-gray-500">Nina</h3>
-                        <p class="text-sm text-red-600 font-semibold bg-red-100 px-3 py-1 rounded-full inline-block mt-2">Offline</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Espaço para funcionalidade futura (ex: Mapa Resumido) -->
-            <div class="mt-12 bg-white rounded-xl shadow-md p-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Visão Geral</h2>
-                <div class="h-80 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
-                    [Aqui pode entrar um mapa com a localização de todos os pets]
+            <div id="petsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="col-span-full text-center py-10 text-gray-500">
+                    Carregando seus pets...
                 </div>
             </div>
         </main>
     </div>
 
+    <script src="{{ url_for('static', filename='api.js') }}"></script>
+    <script>
+        async function handleLogout() {
+            if(confirm('Deseja realmente sair?')) {
+                await logout();
+                window.location.href = '/login';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await getPets();
+                const pets = response.pets;
+                const grid = document.getElementById('petsGrid');
+                
+                grid.innerHTML = '';
+
+                if (pets.length === 0) {
+                    grid.innerHTML = `
+                        <div class="col-span-full text-center py-10 bg-white rounded-xl">
+                            <p class="text-gray-500 mb-4">Você ainda não tem pets cadastrados.</p>
+                            <a href="/adicionar-pet" class="text-brand-orange font-bold hover:underline">Cadastre o primeiro agora!</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                pets.forEach(pet => {
+                    const statusColor = pet.is_online ? 'text-green-600 bg-green-100' : 'text-red-600 bg-red-100';
+                    const statusText = pet.is_online ? 'Online' : 'Offline';
+                    const batteryColor = pet.battery_level < 20 ? 'text-red-500' : 'text-green-600';
+
+                    // Lógica da Imagem
+                    let imageHtml;
+                    if (pet.photo_url && pet.photo_url.trim() !== "") {
+                        // Se tem foto, mostra a imagem
+                        imageHtml = `<img src="${pet.photo_url}" class="w-20 h-20 rounded-lg object-cover border border-gray-200">`;
+                    } else {
+                        // Se não tem, mostra a patinha
+                        imageHtml = `
+                            <div class="w-20 h-20 rounded-lg bg-gray-200 flex items-center justify-center text-3xl">
+                                🐾
+                            </div>
+                        `;
+                    }
+
+                    const card = `
+                        <a href="/mapa/${pet.id}" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:ring-2 hover:ring-brand-orange transition-all duration-300">
+                            <div class="flex items-center space-x-5">
+                                ${imageHtml}
+                                <div class="flex-grow">
+                                    <h3 class="font-bold text-2xl text-gray-800">${pet.name}</h3>
+                                    <div class="flex items-center gap-2 mt-2">
+                                        <span class="text-xs font-semibold px-2 py-1 rounded-full ${statusColor}">${statusText}</span>
+                                        <span class="text-xs font-bold ${batteryColor}">🔋 ${pet.battery_level}%</span>
+                                    </div>
+                                </div>
+                                <div class="text-gray-400">➜</div>
+                            </div>
+                        </a>
+                    `;
+                    grid.innerHTML += card;
+                });
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('petsGrid').innerHTML = '<p class="text-red-500">Erro ao carregar pets.</p>';
+            }
+        });
+    </script>
 </body>
 </html>

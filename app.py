@@ -1,7 +1,9 @@
+import os
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, Response
 from flask_cors import CORS
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from datetime import datetime, timedelta
+from datetime import datetime
+from werkzeug.utils import secure_filename
 import secrets
 import json
 import time
@@ -12,6 +14,19 @@ from config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
+
+# ============================================
+# CONFIGURAÇÃO DE UPLOAD (NOVO)
+# ============================================
+UPLOAD_FOLDER = 'static/uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Criar pasta de upload se não existir
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Inicializar extensões
 db.init_app(app)
@@ -81,6 +96,53 @@ def check_battery_alert(pet_id, battery_level):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+# ============================================
+# ROTAS DE API - UPLOAD E PERFIL (NOVO)
+# ============================================
+
+@app.route('/api/upload', methods=['POST'])
+@login_required
+def upload_file():
+    """Fazer upload de imagem"""
+    if 'file' not in request.files:
+        return jsonify({'error': 'Nenhum arquivo enviado'}), 400
+    
+    file = request.files['file']
+    
+    if file.filename == '':
+        return jsonify({'error': 'Nenhum arquivo selecionado'}), 400
+        
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        # Adicionar timestamp para evitar nomes duplicados
+        filename = f"{int(time.time())}_{filename}"
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        
+        # Retornar URL pública do arquivo
+        file_url = url_for('static', filename=f'uploads/{filename}')
+        return jsonify({'url': file_url}), 200
+    
+    return jsonify({'error': 'Tipo de arquivo não permitido'}), 400
+
+@app.route('/api/user', methods=['PUT'])
+@login_required
+def update_user():
+    """Atualizar perfil do usuário"""
+    data = request.json
+    
+    if 'name' in data:
+        current_user.name = data['name']
+    
+    if 'profile_image' in data:
+        current_user.profile_image = data['profile_image']
+        
+    if 'password' in data and data['password']:
+        current_user.set_password(data['password'])
+        
+    db.session.commit()
+    return jsonify({'message': 'Perfil atualizado', 'user': current_user.to_dict()})
 
 
 # ============================================
@@ -302,17 +364,6 @@ def delete_pet(pet_id):
 def update_gps():
     """
     Endpoint para o ESP32 enviar dados de localização
-    Formato esperado:
-    {
-        "api_key": "chave_do_dispositivo",
-        "latitude": -23.550520,
-        "longitude": -46.633308,
-        "altitude": 760.0,
-        "speed": 0.0,
-        "satellites": 8,
-        "hdop": 1.2,
-        "battery": 85
-    }
     """
     data = request.json
 
@@ -486,14 +537,21 @@ def create_geofence(pet_id):
 @login_required
 def delete_geofence(zone_id):
     """Deletar cerca virtual"""
-    zone = GeofenceZone.query.join(Pet).filter(
-        GeofenceZone.id == zone_id,
-        Pet.user_id == current_user.id
-    ).first()
-
+    # 1. Busca a cerca pelo ID
+    zone = GeofenceZone.query.get(zone_id)
+    
     if not zone:
         return jsonify({'error': 'Cerca não encontrada'}), 404
 
+    # 2. Busca o Pet dono da cerca para verificar permissão
+    pet = Pet.query.get(zone.pet_id)
+
+    # 3. Verifica se o usuário logado é dono do Pet
+    # Isso impede que um usuário apague a cerca de outro
+    if not pet or pet.user_id != current_user.id:
+        return jsonify({'error': 'Acesso negado'}), 403
+
+    # 4. Deleta do banco
     db.session.delete(zone)
     db.session.commit()
 
@@ -536,7 +594,7 @@ def mark_alert_read(alert_id):
 
 
 # ============================================
-# SERVER-SENT EVENTS (TEMPO REAL)
+# SERVER-SENT EVENTS (TEMPO REAL) - ATUALIZADO
 # ============================================
 
 @app.route('/api/pets/<int:pet_id>/stream')
@@ -559,7 +617,15 @@ def stream_pet_location(pet_id):
 
             if location:
                 last_location_id = location.id
-                data = json.dumps(location.to_dict())
+                
+                # BATERIA: Consulta direto do banco para garantir que é a mais recente
+                current_battery = db.session.query(Pet.battery_level).filter(Pet.id == pet_id).scalar()
+                
+                # Monta o pacote de dados com localização E bateria
+                data_dict = location.to_dict()
+                data_dict['battery_level'] = current_battery
+                
+                data = json.dumps(data_dict)
                 yield f"data: {data}\n\n"
 
             time.sleep(2)  # Verificar a cada 2 segundos
