@@ -23,12 +23,12 @@
 // ==========================================
 
 // WiFi
-const char* WIFI_SSID = "Celular de Lucas";
-const char* WIFI_PASSWORD = "lucaspaiolo123456789";
+const char* WIFI_SSID = "SUA_REDE";
+const char* WIFI_PASSWORD = "SUA_SENHA";
 
 // API
-const char* API_URL = "http://127.0.0.1:5000/api/gps/update";
-const char* API_KEY = "rKjT8N0oQ7JX5SZ4JdJc0PHCyJGROgxiuJYwR7G1zmo";  // Você recebe isso ao criar o pet no sistema
+const char* API_URL = "http://SEU-IP:5000/api/gps/update";
+const char* API_KEY = "SEU_PET_API";  // Você recebe isso ao criar o pet no sistema
 
 // Configurações de envio
 const unsigned long SEND_INTERVAL = 30000;  // Enviar a cada 30 segundos
